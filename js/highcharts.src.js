@@ -6105,6 +6105,10 @@ function Chart (options, callback) {
 	 * Clean up memory usage
 	 */
 	function destroy() {
+		// taken from https://github.com/highslide-software/highcharts.com/pull/138
+		// and extended to all of Safari for now
+		if (navigator.appVersion.match(/Safari/)) return false // This will not clean up all the memory, but will not crash safari
+
 		var i = series.length;
 
 		// remove events
